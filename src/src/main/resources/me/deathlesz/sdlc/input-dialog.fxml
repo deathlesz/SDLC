@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="12.0" xmlns="http://javafx.com/fxml/1.0"
+      xmlns:fx="http://javafx.com/fxml">
+    <padding>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+    </padding>
+    <Label text="Введите сигналы Азбуки Морзе:"/>
+    <Label text="Буквы разделяйте пробелом, слова — символом «/» или двумя пробелами."
+           textFill="gray" wrapText="true"/>
+    <TextArea fx:id="inputArea" prefRowCount="4" wrapText="true">
+        <font>
+            <Font name="Monospace" size="14.0"/>
+        </font>
+    </TextArea>
+    <HBox alignment="CENTER_RIGHT" spacing="8.0">
+        <Button defaultButton="true" mnemonicParsing="false" onAction="#onOk" text="ОК"/>
+        <Button cancelButton="true" mnemonicParsing="false" onAction="#onCancel" text="Отмена"/>
+    </HBox>
+</VBox>

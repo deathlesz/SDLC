@@ -1,0 +1,13 @@
+.h1 {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+
+.result {
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a7f37;
+}
+
+.bad {
+    -fx-text-fill: #c62828;
+}

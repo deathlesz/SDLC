@@ -1,0 +1,81 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class "Launcher" as Launcher << (C, #2E8B57) >> {
+    {static} +main(args: String[])
+}
+
+class "MainApplication" as MainApplication << (C, #2E8B57) >> {
+    +start(stage: Stage)
+}
+
+class "MainController" as MainController << (C, #2E8B57) >> {
+    -model: MorseModel
+    -sourceLabel: Label
+    -resultLabel: Label
+    +initialize()
+    +onInputButtonClick()
+    +modelChanged(model: MorseModel)
+    -showError(message: String)
+}
+
+class "MorseModel" as MorseModel << (C, #2E8B57) >> {
+    -decoder: MorseDecoder
+    -listeners: List<Listener>
+    -lastInput: String
+    -decodedText: String
+    -error: String
+    +setInput(input: String)
+    +getLastInput(): String
+    +getDecodedText(): String
+    +getError(): String
+    +isDecoded(): boolean
+    +addListener(listener: Listener)
+    +removeListener(listener: Listener)
+    -notifyListeners()
+}
+
+interface "MorseModel.Listener" as ModelListener << (I, #DAA520) >> {
+    +modelChanged(model: MorseModel)
+}
+
+class "InputDialog" as InputDialog << (C, #2E8B57) >> {
+    -inputArea: TextArea
+    -result: String
+    {static} +show(owner: Window, initialText: String): Optional<String>
+    +onOk()
+    +onCancel()
+}
+
+class "MorseDecoder" as MorseDecoder << (C, #2E8B57) >> {
+    -alphabet: MorseAlphabet
+    +decode(input: String): String
+    -validateCharacters(input: String)
+    -splitWords(input: String): List<String>
+    -decodeWord(word: String): String
+    -decodeLetter(code: String): char
+}
+
+class "MorseAlphabet" as MorseAlphabet << (C, #2E8B57) >> {
+    {static} +ITU: MorseAlphabet
+    -codes: Map<String, Character>
+    +decode(code: String): Character
+    +contains(code: String): boolean
+}
+
+class "MorseDecodeException" as MorseDecodeException << (C, #2E8B57) >> {
+    +MorseDecodeException(message: String)
+}
+
+Launcher ..> MainApplication : launches
+MainApplication ..> MainController : creates (FXMLLoader)
+MainController ..> InputDialog : requests input / opens
+MainController --> MorseModel : updates (setInput)
+MainController ..|> ModelListener : implements
+MorseModel o-- ModelListener : notifies
+MorseModel ..> ModelListener : defines (inner interface)
+MorseModel --> MorseDecoder : uses
+MorseDecoder --> MorseAlphabet : lookup
+MorseDecoder ..> MorseDecodeException : throws
+
+@enduml

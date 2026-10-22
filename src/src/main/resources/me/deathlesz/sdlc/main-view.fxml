@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/fxml/1.0"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="me.deathlesz.sdlc.MainController">
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
+    </padding>
+    <Label styleClass="h1" text="Декодер Азбуки Морзе"/>
+    <Label text="Введите сигналы — программа расшифрует их в текст."/>
+    <Button onAction="#onInputButtonClick" text="Ввести данные">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Button>
+    <Separator/>
+    <Label fx:id="sourceLabel" text="Исходные данные: —" wrapText="true"/>
+    <Label fx:id="resultLabel" styleClass="result" text="Результат: —" wrapText="true"/>
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
+</VBox>
